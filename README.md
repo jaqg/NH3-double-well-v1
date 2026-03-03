@@ -56,26 +56,6 @@ QuTu/
 
 ---
 
-## Physics
-
-The double-well potential for the NH₃ inversion coordinate:
-
-```
-V(x) = (Vb/xe⁴) x⁴ − (2Vb/xe²) x² + Vb
-```
-
-| Parameter | NH₃ value | Units |
-|-----------|-----------|-------|
-| xe        | 0.3816    | Å     |
-| Vb        | 2028.6    | cm⁻¹  |
-| μ (reduced mass) | computed from H, N masses | aₘᵤ |
-
-Wavefunctions and energies are computed by diagonalizing the Hamiltonian matrix
-in a harmonic oscillator basis of size N (even and odd blocks separately).
-Time-dependent dynamics uses analytical propagation via the energy eigenstates.
-
----
-
 ## INPUT format
 
 The `INPUT` file uses `key = value` syntax; lines starting with `#` are comments.
