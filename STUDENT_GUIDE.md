@@ -79,6 +79,43 @@ Vb    = 2028.6       # barrier height (cm^-1)
 
 Output files are written to `src/data/` automatically.
 
+### 3.4 Make the executable accessible from anywhere
+
+After compiling, you can run `QuTu` from any directory using one of two approaches:
+
+**Option A — Symlink in the project root (recommended)**
+
+Create a symlink in the project root pointing to the compiled binary:
+
+```bash
+ln -sf src/build/QuTu QuTu
+./QuTu        # run from the project root
+```
+
+The symlink is gitignored, so it won't appear in your commits. Recreate it
+after each `make clean && make`.
+
+**Option B — Add the build directory to your `$PATH`**
+
+Add this line to your shell config file (`~/.bashrc`, `~/.zshrc`, or `~/.config/fish/config.fish`):
+
+```bash
+# bash / zsh
+export PATH="$PATH:/absolute/path/to/NH3-double-well-v1/src/build"
+
+# fish
+fish_add_path /absolute/path/to/NH3-double-well-v1/src/build
+```
+
+Then reload your shell (`source ~/.bashrc` or open a new terminal) and run:
+
+```bash
+QuTu          # works from any directory
+```
+
+Replace `/absolute/path/to/NH3-double-well-v1` with the actual path on your machine
+(run `pwd` from the project root to get it).
+
 ### 3.4 Visualise results
 
 ```bash
@@ -107,7 +144,7 @@ git push origin main          # keep your fork in sync
 Name your branch descriptively:
 
 ```bash
-git checkout -b feature/generalise-potential
+git checkout -b feature/assymetric-potential
 # or
 git checkout -b fix/convergence-plot
 ```
@@ -117,7 +154,7 @@ git checkout -b fix/convergence-plot
 ```bash
 # after editing files:
 git add src/QuTu.f90
-git commit -m "feat: add Morse potential parametrisation"
+git commit -m "feat: add assymetric potential"
 ```
 
 Good commit message format:
@@ -129,7 +166,7 @@ Good commit message format:
 ### 4.4 Push your branch to your fork
 
 ```bash
-git push origin feature/generalise-potential
+git push origin feature/assymetric-potential
 ```
 
 ### 4.5 Open a Pull Request
