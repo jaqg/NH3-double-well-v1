@@ -194,12 +194,21 @@ contains
         real(dp), intent(in) :: E, Vb, xe
         real(dp), intent(out) :: x1, x2, x3, x4
 
-        ! For V(x) = E, solve (Vb/xe^4)*(x^2 - xe^2)^2 = E - Vb + Vb = E
-        ! x^2 = xe^2 +/- xe^2 * sqrt(E/Vb)
-        x1 = -sqrt(sqrt(E * Vb) / Vb + 1.0_dp) * xe
-        x2 = -sqrt(1.0_dp - sqrt(E * Vb) / Vb) * xe
-        x3 = -x2
+        ! For V(x) = E, solve (Vb/xe^4)*(x^2 - xe^2)^2 = E
+        ! x^2 = xe^2 * (1 +/- sqrt(E/Vb))
+        ! Outer turning points always exist for E > 0
+        x1 = -sqrt(1.0_dp + sqrt(E / Vb)) * xe
         x4 = -x1
+
+        ! Inner turning points exist only when E < Vb;
+        ! for E >= Vb the particle is above the barrier
+        if (E < Vb) then
+            x2 = -sqrt(1.0_dp - sqrt(E / Vb)) * xe
+            x3 = -x2
+        else
+            x2 = 0.0_dp
+            x3 = 0.0_dp
+        end if
     end subroutine turning_points
 
 end module hamiltonian

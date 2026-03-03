@@ -11,9 +11,6 @@ module io
     private
 
     ! Public procedures
-    public :: read_system_input
-    public :: read_grid_params
-    public :: read_masses
     public :: write_energies
     public :: write_wavefunction
     public :: write_potential
@@ -26,82 +23,6 @@ module io
     public :: write_coefficients
 
 contains
-
-    ! -------------------------------------------------------------------------
-    ! Read system input parameters (N, xe, Vb)
-    ! -------------------------------------------------------------------------
-    subroutine read_system_input(filename, N, xe_A, Vb_cm, ierr)
-        character(len=*), intent(in) :: filename
-        integer, intent(out) :: N
-        real(dp), intent(out) :: xe_A, Vb_cm
-        integer, intent(out) :: ierr
-        integer :: unit_num
-
-        open(newunit=unit_num, file=filename, status='old', action='read', iostat=ierr)
-        if (ierr /= 0) then
-            write(*,'(A,A)') 'Error: Cannot open file ', trim(filename)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr)  ! Skip header line
-        if (ierr /= 0) then
-            close(unit_num)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr) N, xe_A, Vb_cm
-        close(unit_num)
-    end subroutine read_system_input
-
-    ! -------------------------------------------------------------------------
-    ! Read grid parameters (xmin, xmax, dx)
-    ! -------------------------------------------------------------------------
-    subroutine read_grid_params(filename, xmin, xmax, dx, ierr)
-        character(len=*), intent(in) :: filename
-        real(dp), intent(out) :: xmin, xmax, dx
-        integer, intent(out) :: ierr
-        integer :: unit_num
-
-        open(newunit=unit_num, file=filename, status='old', action='read', iostat=ierr)
-        if (ierr /= 0) then
-            write(*,'(A,A)') 'Error: Cannot open file ', trim(filename)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr)  ! Skip header
-        if (ierr /= 0) then
-            close(unit_num)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr) xmin, xmax, dx
-        close(unit_num)
-    end subroutine read_grid_params
-
-    ! -------------------------------------------------------------------------
-    ! Read atomic masses (mH, mN in amu)
-    ! -------------------------------------------------------------------------
-    subroutine read_masses(filename, mH, mN, ierr)
-        character(len=*), intent(in) :: filename
-        real(dp), intent(out) :: mH, mN
-        integer, intent(out) :: ierr
-        integer :: unit_num
-
-        open(newunit=unit_num, file=filename, status='old', action='read', iostat=ierr)
-        if (ierr /= 0) then
-            write(*,'(A,A)') 'Error: Cannot open file ', trim(filename)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr)  ! Skip header
-        if (ierr /= 0) then
-            close(unit_num)
-            return
-        end if
-
-        read(unit_num, *, iostat=ierr) mH, mN
-        close(unit_num)
-    end subroutine read_masses
 
     ! -------------------------------------------------------------------------
     ! Write energies to file

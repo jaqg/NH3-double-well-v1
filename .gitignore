@@ -1,5 +1,5 @@
 # =============================================================================
-# .gitignore for Quantum Tunnelling Project (Fortran/Python)
+# .gitignore for QuTu — Quantum Tunnelling Simulator
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -10,7 +10,9 @@
 *.a
 *.so
 
-# Fortran executable (without extension)
+# Build artifacts
+src/build/
+src/QuTu
 src/doble_pozo_NH3
 
 # Backup files
@@ -36,18 +38,27 @@ env/
 # -----------------------------------------------------------------------------
 # Output data files (regenerable from code)
 # -----------------------------------------------------------------------------
-src/data/out-*.dat
+output/
+**/output/*.dat
 
 # -----------------------------------------------------------------------------
 # Generated graphics (regenerable from scripts)
 # -----------------------------------------------------------------------------
-src/grafica/*.pdf
-src/grafica/*.svg
+scripts/static/*.pdf
+scripts/static/*.svg
+scripts/animations/videos/
+tutorial/figures/
 
-# Animation outputs
-src/animacion/videos/*.mp4
-src/animacion/videos/*.avi
-src/animacion/graficas/*.png
+# -----------------------------------------------------------------------------
+# LaTeX intermediates
+# -----------------------------------------------------------------------------
+docs/*.aux
+docs/*.log
+docs/*.fls
+docs/*.fdb_latexmk
+docs/*.out
+docs/*.synctex.gz
+docs/*.toc
 
 # -----------------------------------------------------------------------------
 # Editor and IDE files
